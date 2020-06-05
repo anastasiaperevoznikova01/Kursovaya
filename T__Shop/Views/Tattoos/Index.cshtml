@@ -1,0 +1,194 @@
+﻿@model IEnumerable<T__Shop.Tattoo>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Alfa+Slab+One|Gloria+Hallelujah|Irish+Grover|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+
+    <title>TRIPTATTO</title>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <p><a name="top"></a></p>
+    <header class="header">
+        <div class="container_h">
+            <div class="header__inner">
+                <div class="header__logo">TRIPTATTO</div>
+
+                <nav class="nav">
+                    <a class="nav__link" href="#About">About</a>
+                    <a class="nav__link" href="#Catalog">Catalog</a>
+                    <a class="nav__link" href="#Contact">Contact</a>
+                    <a class="nav__link text-white " asp-area="" asp-controller="Orders" asp-action="Index">Basket</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-controller="Users" asp-action="OneUser">
+                            <input type="submit" value="MyPage" class="mypurp text-right" />
+                        </form>
+
+
+
+                    }
+                    else
+                    {
+
+
+                        <form method="post" asp-controller="Account" asp-action="Login">
+                            <input type="submit" value="Вхід" class="menu1 mypurp " />
+                        </form>
+
+
+
+                        <form method="post" asp-controller="Account" asp-action="Register">
+                            <input type="submit" value="Реєстрація" class="menu mypurp" />
+                        </form>
+                    }
+
+                </nav>
+                </div>
+        </div>
+    </header>
+    <div class="intro">
+        <div class="container">
+            <div class="intro__inner">
+                <h1 class="intro__title"> Welcome to TRIPTATTO  studio</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section">
+        <p><a name="About"></a></p>
+        <div class="section__header">
+            <h3 class="section__suptitle">Магазин твоей мечты!</h3>
+            <h2 class="section__title">Наш замечательный мастер:</h2>
+            <div class="section__text">
+                <div class="img"><img src="~/images/photo.jpg" align="left" alt="Helen" title="Наш мастер Алена" width="360"></div>
+                <div class="text">
+                    <p>
+                        Меня зовут Helen и я тату-мастер. Занимаюсь этим просто по тому, что мне это приносит неимоверное удовольствие!
+                        Но на традиционные татуировки решится не каждый, а украсить тело переводными татушками это совсем другое дело:)
+
+                        Потому у меня и моих друзей появилась идея создать “TRIPTATTO” — интернет-магазин переводных тату с доставкой по всей Польше, где можно купить временные тату на любой вкус и цвет.
+
+
+
+                        Легкое и безболезненное нанесение изображения на кожу, а также простое удаление остатков рисунка, делают этот вид боди-арт доступным и увлекательным средством разнообразить свой ежедневный облик.
+
+                        Переводные татуировки абсолютно безопасные. Они представляют собой наклейки со специальными, не токсичными красками, которые держатся на коже от 3 до 10 дней.
+                    </p>
+                </div>
+            </div>
+            <img src="~/images/00.jpg" alt="tatto" title="тату оборудование" width="320">
+            <img src="~/images/00000.jpg" alt="tatto" title="ескиз для татуировки" width="300">
+            <img src="~/images/0000.jpg" alt="tatto" title="Работа от нашего мастера" width="320">
+        </div>
+    </section>
+
+
+        <div class="intro2">
+            <div class="intro__title2">
+                <br>
+                <p><a name="Catalog"></a></p>
+                Каталог:
+            </div>
+            <br>
+            <div>
+                @foreach (var item in Model)
+                {
+                    string strBase64 = Convert.ToBase64String(item.Image);
+                    string imageurl = "data:Image/png;base64," + strBase64;
+
+                    <div class="tattoo">
+                        <div class="tbox">
+                            <div class="col-3"><div class="tile" style="background:url(@imageurl) center no-repeat;background-size: 280px 280px;background-size: 280px 280px contain;"><span>@Html.DisplayFor(modelItem => item.Name)</span></div></div>
+                            
+                            <div class="price">
+                                <p>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </p>
+                            </div>
+                            <div class="addb">
+                                <button class="add" action="javascript:void(0);" method="POST" onclick="addorder(@item.Id,'@User.Identity.Name')" style="outline:none; border:0;background:transparent;"><img src="~/images/117885.png"  width="30px" height="30px"/></button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+
+        </div>
+
+
+
+        <div class="intro3" id="Contact">
+            <div class="intro__title3">
+                <p><a name="BLOG"></a></p>
+                <br>CONTACT
+            </div>
+            <div class="container1">
+                <div class="contact">
+                    Мы всегда рады помочь Вам и ответить на все Ваши вопросы. Мы внимательно относимся к каждому звонку и доступны для Вас c 08:00 до 22:00<br>
+                    Вы можете связаться с нами удобным для Вас способом!<br>
+                    <br><p>
+                        <img src="~/images/9090.png" title="соцсети" align="right" height="300">
+                        Телефон службы поддержки клиентов:<br>
+                        +44 888 783 20 10<br>
+                        +44 666 647 10 10<br>
+                        <br>
+                        Телефон для оформления заказов:<br>
+                        +43 777 787 40 77<br>
+                        <br>
+                        Адрес электронной почты:<br>
+                        tripp_tattoo@gmail.com<br>
+                        <br>
+                        WhatsApp / Viber:<br>
+                        +44 456 879 77 32
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="intro4">
+
+        </div>
+
+
+
+        <footer>
+            <div class="footer">
+                <div class="text_f">
+                    <div class="info">
+                    <img src="~/images/1024px-Instagram_icon.png" width="30" height="30"/>
+                    <span>inst: @@trip__tattoo</span>
+                    </div>
+                    <div class="info">
+                    <img src="~/images/1200px-Facebook_F_icon.svg.png" width="30" height="30" />
+                    <span>fb: trip tattoo</span>
+                    </div>
+                    <div class="info">
+                    <img src="~/images/pin.png" width="30" height="30"/>
+                    <span>pinterest: trip__tattoo</span>
+                    </div>
+                    <div class="info">
+                    <img src="~/images/you.png" width="30" height="30"/>
+                    <span>YouTube: trip__tattoo</span>
+                    </div>
+                    <div class="info">
+                    <img src="~/images/localizador 13.png" width="30" height="30"/>
+                    <span>Kiev 2020</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</body>
+</html>

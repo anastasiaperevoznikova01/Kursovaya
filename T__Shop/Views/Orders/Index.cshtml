@@ -1,0 +1,54 @@
+﻿@model IEnumerable<T__Shop.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<header class="himage header">
+    <div class="container_h">
+        <div class="header__inner">
+            <div class="header__logo" style="margin-left:auto;margin-right:auto;"><a class="nav-link text-light" asp-controller="Tattoos" asp-action="Index">TRIPTATTO</a></div>
+
+            <nav class="nav">
+
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<div class="intro2" >
+    <div class="intro__title2" style="margin-top:80px">
+        <br>
+        <p><a name="Catalog"></a></p>
+        Заказ:
+    </div>
+    <br>
+    <div>
+        @foreach (var item in Model)
+        {
+
+            if (@User.Identity.Name == @item.UserId)
+            {
+                    <div>
+           
+                        @{
+                            string strBase64 = Convert.ToBase64String(item.Tattoo.Image);
+                            string imageurl = "data:Image/png;base64," + strBase64;
+                        }
+                        <img src="@imageurl" width="280" height="280" />
+
+                        @Html.DisplayFor(modelItem => item.Tattoo.Name)
+
+                        @Html.DisplayFor(modelItem => item.Tattoo.Price)
+
+                        <button onclick="deleteOrder(@item.Id)">Delete</button>
+            
+                    </div>
+            }
+         }
+    </div>
+
+   
+</div>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<T__Shop.Models.User>
+@{
+    ViewBag.Title = "Список пользователей";
+}
+<head>
+
+</head>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="margin-bottom:0; opacity:0.8; width:100%;">
+    <div class="container">
+        <a class="navbar-brand" asp-area="" asp-controller="Tattoos" asp-action="Index">TRIPTATTOO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+
+            <a class="nav-link text-dark" asp-area="" asp-controller="Tattoos" asp-action="Index">Home</a>
+
+
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+            
+
+        </div>
+    </div>
+</nav>
+
+<div class="bg-light text-center bg-mydark"><h2 class="text-center text-mybright text-black-50">Інформація аккаунту</h2></div>
+<div class="bg-light text-center text-black-50 bg-mydark">
+    @foreach (var user in Model)
+    {
+        if (user.Email == User.Identity.Name)
+        {
+
+            <p class="text-mybright">@user.Email</p>
+            <p class="text-mybright">@user.Year</p>
+            <div style="margin:0 auto; ">
+                <table class="text-center">
+                    <tr>
+                        <td>
+                            <form method="post" asp-controller="Account" asp-action="Logout">
+                                <input type="submit" value="Вихід" class="btn btn-sm bg-my btn-primary" />
+                            </form>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm bg-my btn-primary" asp-action="ChangePassword" asp-route-id="@user.Id">Сменить пароль</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm bg-my btn-primary" asp-action="Edit" asp-route-id="@user.Id">Изменить</a>
+                        </td>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <td>
+                                <a asp-controller="Tattoos" asp-action="Create">Add new Tattoo</a>
+                            </td>
+                            <td>
+                                <form method="post" asp-controller="Roles" asp-action="UserList">
+                                    <input type="submit" value="Права" class="btn btn-sm bg-my btn-primary" />
+                                </form>
+
+                            </td>
+                            <td>
+                                <form method="post" asp-controller="Users" asp-action="Index">
+                                    <input type="submit" value="Список користувачів" class="btn btn-sm bg-my btn-primary" />
+                                </form>
+                            </td>
+
+                        }
+                    </tr>
+                </table>
+            </div>
+        }
+    }
+</div>

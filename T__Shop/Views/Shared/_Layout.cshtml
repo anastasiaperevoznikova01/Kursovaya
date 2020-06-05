@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TRIPTATTOO</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/images/eagle.png" type="images/png">
+   
+</head>
+<body>
+    <header>
+        <!--<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="margin-bottom:0; opacity:0.8; width:100%;">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Tattoos" asp-action="Index">T__Shop</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Tattoos" asp-action="Index">Home</a>
+
+
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                    <a class="nav__link text-dark" href="#About">About</a>
+                    <a class="nav__link text-dark" href="#Catalog">Catalog</a>
+                    <a class="nav__link text-dark" href="#Blog">Contact</a>
+                    <a class="nav__link text-dark" href="#contact">Blog</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form method="post" asp-controller="Users" asp-action="OneUser">
+                            <input type="submit" value="MyPage" class="mypurp text-right" />
+                        </form>
+                        <p class=" mypurp" style="margin-bottom:0px;">@User.Identity.Name</p>
+
+
+                    }
+                    else
+                    {
+
+
+                        <form method="post" asp-controller="Account" asp-action="Login">
+                            <input type="submit" value="Вхід" class="menu1 mypurp " />
+                        </form>
+
+
+
+                        <form method="post" asp-controller="Account" asp-action="Register">
+                            <input type="submit" value="Реєстрація" class="menu mypurp" />
+                        </form>
+
+                    }
+                </div>
+            </div>
+        </nav>-->
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/order.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
